@@ -2,7 +2,7 @@ import { OnInit, OnDestroy, Injector } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { AuthService } from './auth.service';
 
-export abstract class AuthBase implements OnInit, OnDestroy {
+export abstract class AuthBase implements OnInit {
 
     form: FormGroup;
     build: FormBuilder;
@@ -14,15 +14,10 @@ export abstract class AuthBase implements OnInit, OnDestroy {
     }
 
     abstract onInit();
-    abstract onEnd();
 
 
     ngOnInit(): void {
         this.onInit();
-    }
-
-    ngOnDestroy(): void {
-        this.onEnd();
     }
 
 }

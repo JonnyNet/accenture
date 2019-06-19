@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
@@ -25,35 +25,13 @@ describe('AuthService', () => {
         expect(service).toBeTruthy();
     });
 
-    it('identificacion no registrada', () => {
-        const id = '1234565432';
-        service.getAllData().pipe(
-            map(item => {
-                return item[0].identification;
-            })
-        ).subscribe((res: Array<string>) => {
-            expect(res).toContain(id);
-        });
-
-        const req = httpMock.expectOne('https://testbankapi.firebaseio.com/clients.json');
-        expect(req.request.method).toEqual('GET');
-
-        req.flush({
-            data: [
-                { "-Lb_JtJG2xzkIAihkVwB": { identification: "123456789" } },
-                { "-Lc4g5JntIRAycr8bBqR": { identification: "1234" } }
-            ]
-        });
-
-        httpMock.verify();
-
-    });
-
-    it('identificacion registrada', () => {
+    it('validar identificacion', () => {
         const id = '1234';
         service.getAllData().pipe(
-            map(item => {
-                return item[0].identification;
+            map((item: any) => {
+                return Object.keys(item).map(index => {
+                    return item[index].identification
+                });
             })
         ).subscribe((res: Array<string>) => {
             expect(res).toContain(id);
@@ -63,10 +41,8 @@ describe('AuthService', () => {
         expect(req.request.method).toEqual('GET');
 
         req.flush({
-            data: [
-                { "-Lb_JtJG2xzkIAihkVwB": { identification: "123456789" } },
-                { "-Lc4g5JntIRAycr8bBqR": { identification: "1234" } }
-            ]
+            "-Lb_JtJG2xzkIAihkVwB": { identification: "123456789" },
+            "-Lc4g5JntIRAycr8bBqR": { identification: "1234" }
         });
 
         httpMock.verify();

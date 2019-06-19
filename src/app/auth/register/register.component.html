@@ -1,40 +1,49 @@
-<div>
+
+<section>
     <div>
-        Hola mundo
+        <img src="http://notas.tuhogarmexico.com/wp-content/uploads/2017/07/modelos-de-edificios-3d-7570.jpg" alt="image">
     </div>
     <div>
         <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
             <div fxLayout="column" fxLayoutAlign="none">
                 <mat-form-field appearance="outline">
                     <mat-label>Identificacion</mat-label>
-                    <input formControlName="identification" matInput placeholder="Identificacion" required>
+                    <input formControlName="identification" matInput placeholder="Identificacion" required
+                        autocomplete="off">
                     <mat-icon matSuffix>verified_user</mat-icon>
-                    <mat-hint>Campo numerico</mat-hint>
+                    <mat-error *ngIf="form.get('identification').hasError('required')">Digite identificación</mat-error>
+                    <mat-error *ngIf="form.get('identification').hasError('minlength')">Minimo 4 caracteres</mat-error>
+                    <mat-error *ngIf="form.get('identification').hasError('maxlength')">Maximo 10 caracteres</mat-error>
+                    <mat-error *ngIf="form.get('identification').hasError('pattern')">Campo numerico</mat-error>
+                    <mat-error *ngIf="form.get('identification').hasError('checkId')">Indentificación ya existe</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Nombre</mat-label>
-                    <input formControlName="firstname" matInput placeholder="Nombre" required>
+                    <input formControlName="firstname" matInput placeholder="Nombre" required autocomplete="off">
                     <mat-icon matSuffix>perm_identity</mat-icon>
-                    <mat-hint>perm_identity</mat-hint>
+                    <mat-error *ngIf="form.get('firstname').hasError('required')">Digite nombre</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Apellidos</mat-label>
-                    <input formControlName="lastname" matInput placeholder="Apellidos" required>
+                    <input formControlName="lastname" matInput placeholder="Apellidos" required autocomplete="off">
                     <mat-icon matSuffix>perm_identity</mat-icon>
-                    <mat-hint>perm_identity</mat-hint>
+                    <mat-error *ngIf="form.get('lastname').hasError('required')">Digite apellido</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Fecha Nacimiento</mat-label>
-                    <input formControlName="birthdate" matInput [matDatepicker]="picker" placeholder="Fecha Nacimiento" required>
+                    <input formControlName="birthdate" matInput [matDatepicker]="picker" placeholder="Fecha Nacimiento"
+                        required autocomplete="off">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="form.get('birthdate').hasError('required')">Seleccione fecha</mat-error>
+                    <mat-error *ngIf="form.get('birthdate').hasError('ageCheck')">Debe ser mayor de edad</mat-error>
                 </mat-form-field>
 
                 <div fxLayout="row" fxLayoutAlign="center center">
-                    <button type="submit" [disabled]="!form.valid">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">
                         <mat-icon aria-hidden="false">save</mat-icon>
                         Enviar
                     </button>
@@ -42,4 +51,4 @@
             </div>
         </form>
     </div>
-</div>
+</section>
