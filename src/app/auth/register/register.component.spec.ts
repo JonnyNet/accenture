@@ -132,7 +132,7 @@ describe('RegisterComponent', () => {
 		expect(component.form.valid).toBeFalsy();
 		let identification = component.form.get('identification');
 		identification.clearAsyncValidators();
-		identification.setAsyncValidators(mockPartnerCodeAvailabilityValidator.bind(this))
+		//identification.setAsyncValidators(mockPartnerCodeAvailabilityValidator.bind(this))
 		component.form.patchValue({
 			identification: '1234561',
 			firstname: 'jonny',

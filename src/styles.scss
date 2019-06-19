@@ -80,11 +80,10 @@ $green: (
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$prueba-accenture-primary: mat-palette($orange);
+$prueba-accenture-primary: mat-palette($green);
 $prueba-accenture-accent: mat-palette($green);
-
 // The warn palette is optional (defaults to red).
-$prueba-accenture-warn: mat-palette($mat-red, 400);
+$prueba-accenture-warn: mat-palette($orange);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $prueba-accenture-theme: mat-light-theme($prueba-accenture-primary, $prueba-accenture-accent, $prueba-accenture-warn);

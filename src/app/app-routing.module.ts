@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/auth/register', pathMatch: 'full' },
-    { path: 'auth', loadChildren: './auth/auth.module#AuthModule' },
+    { path: '', redirectTo: '/client/register', pathMatch: 'full' },
+    { path: 'client', loadChildren: './auth/auth.module#AuthModule' },
 ];
 
 @NgModule({
