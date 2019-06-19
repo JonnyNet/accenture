@@ -1,19 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RegisterComponent } from './register.component';
-import { ReactiveFormsModule, FormBuilder, AbstractControl } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { from } from 'rxjs';
+import { from, Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { DebugElement, Query } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { MatInputModule, MatFormFieldControl, MatFormFieldModule, MatIconModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 describe('RegisterComponent', () => {
 	let component: RegisterComponent;
 	let fixture: ComponentFixture<RegisterComponent>;
-	let de : DebugElement;
-	let el : HTMLElement;
+	let de: DebugElement;
+	let el: HTMLElement;
 
 	const formBuilder: FormBuilder = new FormBuilder();
 
@@ -25,7 +28,11 @@ describe('RegisterComponent', () => {
 			imports: [
 				CommonModule,
 				ReactiveFormsModule,
-				HttpClientTestingModule
+				BrowserAnimationsModule,
+				HttpClientTestingModule,
+				MatInputModule,
+				MatFormFieldModule,
+				MatIconModule
 			],
 			providers: [
 				AuthService,
@@ -61,22 +68,22 @@ describe('RegisterComponent', () => {
 		let errors = {};
 		errors = identification.errors || {};
 		expect(errors['required']).toBeTruthy();
-		expect(errors['minLength']).toBeTruthy();
-		expect(errors['maxLength']).toBeTruthy();
-		expect(errors['pattern']).toBeTruthy();
+		expect(errors['minLength']).toBeFalsy();
+		expect(errors['maxLength']).toBeUndefined();
+		expect(errors['pattern']).toBeUndefined();
+		expect(errors['checkId']).toBeUndefined();
 
 
 		identification.clearAsyncValidators();
-		identification.setValue('1047389512');
 		identification.setAsyncValidators(mockPartnerCodeAvailabilityValidator.bind(this))
+		identification.setValue('1047389512');
 		errors = identification.errors || {};
 
-		expect(errors['required']).toBeTruthy();
-		expect(errors['minLength']).toBeTruthy();
-		expect(errors['maxLength']).toBeTruthy();
-		expect(errors['pattern']).toBeTruthy();
-		expect(errors['checkId']).toBeTruthy();
-
+		expect(errors['required']).toBeUndefined();
+		expect(errors['minLength']).toBeUndefined();
+		expect(errors['maxLength']).toBeUndefined();
+		expect(errors['pattern']).toBeUndefined();
+		expect(errors['checkId']).toBeUndefined();
 	});
 
 
@@ -88,26 +95,26 @@ describe('RegisterComponent', () => {
 		errors = firstname.errors || {};
 		expect(errors['required']).toBeTruthy();
 
-		firstname.setValue('jonny');
+		firstname.setValue('jonny rojas');
 		errors = firstname.errors || {};
 
-		expect(errors['required']).toBeTruthy();
+		expect(errors['required']).toBeUndefined();
 
 	});
 
 
 	it('campo lastName', () => {
-		let lastName = component.form.get('lastName');
-		expect(lastName.valid).toBeFalsy();
+		let lastname = component.form.get('lastname');
+		expect(lastname.valid).toBeFalsy();
 
 		let errors = {};
-		errors = lastName.errors || {};
+		errors = lastname.errors || {};
 		expect(errors['required']).toBeTruthy();
 
-		lastName.setValue('rojas del rio');
-		errors = lastName.errors || {};
+		lastname.setValue('rojas del rio');
+		errors = lastname.errors || {};
 
-		expect(errors['required']).toBeTruthy();
+		expect(errors['required']).toBeUndefined();
 	});
 
 
@@ -118,22 +125,22 @@ describe('RegisterComponent', () => {
 		let errors = {};
 		errors = birthdate.errors || {};
 		expect(errors['required']).toBeTruthy();
-		expect(errors['ageCheck']).toBeTruthy();
+		expect(errors['ageCheck']).toBeUndefined();
 
 		birthdate.setValue('2008-09-22T14:01:54.9571247Z');
 		errors = birthdate.errors || {};
 
-		expect(errors['required']).toBeTruthy();
-		expect(errors['ageCheck']).toBeTruthy();
+		expect(errors['required']).toBeUndefined();
+		expect(errors['ageCheck']).toBeUndefined();
 	});
 
 	it('formulario valido con datos', () => {
 		expect(component.form.valid).toBeFalsy();
-		component.form.pathValue({
-			identification : '12345676543',
-			firstname : 'wertytre',
-			lastName : '1234567654',
-			birthdate : '2008-09-22T14:01:54.9571247Z'
+		component.form.patchValue({
+			identification: '123456765',
+			firstname: 'wertytre',
+			lastname: '1234567654',
+			birthdate: '2008-09-22T14:01:54.9571247Z'
 		});
 		expect(component.form.valid).toBeTruthy();
 	});
@@ -148,10 +155,11 @@ describe('RegisterComponent', () => {
 });
 
 
-export async function mockPartnerCodeAvailabilityValidator(control: AbstractControl) {
-	return from(new Promise((resolve, reject) => {
-		const data = '1234567890';
+function mockPartnerCodeAvailabilityValidator(control: AbstractControl) {
+	return from(new Promise(res => {
+		const data = '1047389512';
 		const result = data == control.value;
-		result ? resolve({ checkId: true }) : resolve(null);
+		const output: any = result ? { checkId: true } : null;
+		res(output);
 	}));
 }
