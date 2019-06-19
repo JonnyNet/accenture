@@ -130,11 +130,14 @@ describe('RegisterComponent', () => {
 
 	it('formulario valido con datos', () => {
 		expect(component.form.valid).toBeFalsy();
+		let identification = component.form.get('identification');
+		identification.clearAsyncValidators();
+		identification.setAsyncValidators(mockPartnerCodeAvailabilityValidator.bind(this))
 		component.form.patchValue({
-			identification: '123456765',
-			firstname: 'wertytre',
-			lastname: '1234567654',
-			birthdate: '2008-09-22T14:01:54.9571247Z'
+			identification: '1234561',
+			firstname: 'jonny',
+			lastname: 'rojas',
+			birthdate: '2008-09-22'
 		});
 		expect(component.form.valid).toBeTruthy();
 	});

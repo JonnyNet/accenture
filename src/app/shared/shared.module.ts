@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule, MatIconModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule } from '@angular/material';
+import { MatFormFieldModule, MatIconModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
     declarations: [],
@@ -16,7 +16,8 @@ import { MatFormFieldModule, MatIconModule, MatInputModule, MatDatepickerModule,
         MatInputModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatButtonModule
+        MatButtonModule,
+        MatProgressSpinnerModule
     ],
     exports: [
         CommonModule,
@@ -28,7 +29,8 @@ import { MatFormFieldModule, MatIconModule, MatInputModule, MatDatepickerModule,
         MatInputModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatButtonModule
+        MatButtonModule,
+        MatProgressSpinnerModule
     ]
 })
 export class SharedModule { }

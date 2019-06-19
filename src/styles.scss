@@ -9,14 +9,82 @@
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
+$orange: (
+    50 : #ffece5,
+    100 : #ffcebe,
+    200 : #ffae93,
+    300 : #fe8e67,
+    400 : #fe7547,
+    500 : #fe5d26,
+    600 : #fe5522,
+    700 : #fe4b1c,
+    800 : #fe4117,
+    900 : #fd300d,
+    A100 : #ffffff,
+    A200 : #fff6f5,
+    A400 : #ffc9c2,
+    A700 : #ffb2a8,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$green: (
+    50 : #f0f7f1,
+    100 : #d8ebdc,
+    200 : #bfdec4,
+    300 : #a5d0ac,
+    400 : #91c69b,
+    500 : #7ebc89,
+    600 : #76b681,
+    700 : #6bad76,
+    800 : #61a56c,
+    900 : #4e9759,
+    A100 : #f6fff8,
+    A200 : #c3ffcc,
+    A400 : #90ffa0,
+    A700 : #77ff8b,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$prueba-accenture-primary: mat-palette($mat-indigo);
-$prueba-accenture-accent: mat-palette($mat-pink, A200, A100, A400);
+$prueba-accenture-primary: mat-palette($orange);
+$prueba-accenture-accent: mat-palette($green);
 
 // The warn palette is optional (defaults to red).
-$prueba-accenture-warn: mat-palette($mat-red);
+$prueba-accenture-warn: mat-palette($mat-red, 400);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $prueba-accenture-theme: mat-light-theme($prueba-accenture-primary, $prueba-accenture-accent, $prueba-accenture-warn);
@@ -27,6 +95,10 @@ $prueba-accenture-theme: mat-light-theme($prueba-accenture-primary, $prueba-acce
 @include angular-material-theme($prueba-accenture-theme);
 
 /* You can add global styles to this file, and also import other style files */
+
+
+
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

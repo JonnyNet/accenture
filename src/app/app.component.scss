@@ -1,0 +1,28 @@
+@import "theme.scss";
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  background: url("https://images.pexels.com/photos/417411/pexels-photo-417411.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+    no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.container::before {
+  position: sticky;
+  content: " ";
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  display: block;
+  z-index: 0;
+  background: linear-gradient(to bottom right, $primaty-color, $primaty-color-light);
+  opacity: 0.4;
+  background-size: 100% 100%;
+}

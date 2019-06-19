@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SpinnerComponent } from './spinner.component';
+import { SharedModule } from '../shared/shared.module';
 
 describe('SpinnerComponent', () => {
   let component: SpinnerComponent;
@@ -8,7 +9,8 @@ describe('SpinnerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SpinnerComponent ]
+      declarations: [ SpinnerComponent ],
+      imports : [SharedModule]
     })
     .compileComponents();
   }));

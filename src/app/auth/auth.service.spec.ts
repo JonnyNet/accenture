@@ -30,7 +30,7 @@ describe('AuthService', () => {
         service.getAllData().pipe(
             map((item: any) => {
                 return Object.keys(item).map(index => {
-                    return item[index].identification
+                    return item[index]
                 });
             })
         ).subscribe((res: Array<string>) => {

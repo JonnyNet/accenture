@@ -16,7 +16,8 @@ export function chackIdValidator(service: AuthService) {
 }
 
 export function ageCheckValidator(control: AbstractControl) {
-    if (control.value !== '' && control.value !== undefined) {
+    const value = control.value;
+    if (control.value !== '' && control.value !== undefined && value instanceof Date) {
         const birthdate = control.value;
         const currentdate = new Date();
         const years = currentdate.getFullYear() - birthdate.getFullYear()

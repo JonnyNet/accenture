@@ -5,20 +5,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+import { MatProgressSpinnerModule } from '@angular/material';
 
 
 @NgModule({
     declarations: [
         AppComponent,
-        SpinnerComponent
+        SpinnerComponent,
+        NavbarComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        HttpClientModule
+        HttpClientModule,
+        SnotifyModule,
+        MatProgressSpinnerModule
     ],
-    providers: [],
+    providers: [
+        SnotifyService,
+        { provide: 'SnotifyToastConfig', useValue: ToastDefaults }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
